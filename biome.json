@@ -1,0 +1,25 @@
+{
+	"organizeImports": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"correctness": {
+				"noUnusedVariables": "warn",
+				"noUnusedImports": "off"
+			},
+			"a11y": {
+				"useButtonType": "warn"
+			}
+		}
+	},
+	"formatter": {
+		"enabled": true,
+		"formatWithErrors": false
+	},
+	"files": {
+		"ignore": ["node_modules/**/*", "assets/**/*"]
+	}
+}

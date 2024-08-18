@@ -74,6 +74,31 @@
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <div class="page-width">
+    {% unless collection %}
+      Yea
+    {% endunless %}
+    {% if settings.show_product_navigation %}
+      {% style %}
+        .product-navigation {
+          display: flex;
+          justify-content: {% if collection.previous_product %}space-between{% else %}flex-end{% endif %};
+          width: 100%;
+          padding-bottom: {{ settings.product_navigation_padding_bottom }}px;
+        }
+      {% endstyle %}
+      <div class="product-navigation">
+        {% if collection.previous_product %}
+          <a class="button previous" href="{{ collection.previous_product }}">
+            {{- settings.product_navigation_previous_text | escape -}}
+          </a>
+        {% endif %}
+        {% if collection.next_product %}
+          <a class="button next" href="{{ collection.next_product }}">
+            {{- settings.product_navigation_next_text | escape -}}
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
     <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
       <div class="grid__item product__media-wrapper">
         {% render 'product-media-gallery', variant_images: variant_images %}
@@ -462,6 +487,20 @@
                 %}
 
               {%- when 'variant_picker' -%}
+                {%- if product.type == 'snowboard' -%}
+                  <div class="field">
+                    <input
+                      class="field__input"
+                      id="your-name"
+                      type="text"
+                      name="properties[Your name]"
+                      form="{{ product_form_id }}"
+                      placeholder="Your name Place"
+                    >
+                    <label class="field__label" for="your-name">Your name Place </label>
+                  </div>
+                {%- endif -%}
+
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
               {%- when 'buy_buttons' -%}
                 {%- render 'buy-buttons',

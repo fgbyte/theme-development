@@ -1,0 +1,9 @@
+{% liquid
+  assign my_variable = 10
+
+  for product in collection.products
+    echo '<p>' | append: product.title | append: '</p>'
+  endfor
+%}
+
+<p>{{ my_variable }}</p>

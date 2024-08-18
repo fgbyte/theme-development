@@ -115,7 +115,7 @@
               {% endif %}
             >
               <a
-                href="{{ card_product.url }}"
+                href="{% if settings.show_product_navigation %}{{ card_product.url | within: collection }}{% else %}{{ card_product.url }}{% endif %}"
                 id="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }}"
                 class="full-unstyled-link"
                 aria-labelledby="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }} NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
@@ -152,7 +152,7 @@
             {% endif %}
           >
             <a
-              href="{{ card_product.url }}"
+              href="{% if settings.show_product_navigation %}{{ card_product.url | within: collection }}{% else %}{{ card_product.url }}{% endif %}"
               id="CardLink-{{ section_id }}-{{ card_product.id }}"
               class="full-unstyled-link"
               aria-labelledby="CardLink-{{ section_id }}-{{ card_product.id }} Badge-{{ section_id }}-{{ card_product.id }}"
@@ -496,7 +496,7 @@
                           {% if card_product == blank %}
                             role="link" aria-disabled="true"
                           {% else %}
-                            href="{{ card_product.url }}"
+                            href="{% if settings.show_product_navigation %}{{ card_product.url | within: collection }}{% else %}{{ card_product.url }}{% endif %}"
                           {% endif %}
                           class="link product__view-details animate-arrow small-hide medium-hide"
                         >
@@ -505,7 +505,10 @@
                         </a>
                       </div>
                       <div class="quick-add-modal__content-info--bulk-details large-up-hide">
-                        <a href="{{ card_product.url }}" class="full-unstyled-link">
+                        <a
+                          href="{% if settings.show_product_navigation %}{{ card_product.url | within: collection }}{% else %}{{ card_product.url }}{% endif %}"
+                          class="full-unstyled-link"
+                        >
                           <h3>{{ card_product.title | escape }}</h3>
                         </a>
                         {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
@@ -518,7 +521,10 @@
                     </div>
                     <div>
                       <div class="quick-add-modal__content-info--bulk-details small-hide medium-hide">
-                        <a href="{{ card_product.url }}" class="full-unstyled-link">
+                        <a
+                          href="{% if settings.show_product_navigation %}{{ card_product.url | within: collection }}{% else %}{{ card_product.url }}{% endif %}"
+                          class="full-unstyled-link"
+                        >
                           <h3 class="h2">
                             {{ card_product.title | escape }}
                           </h3>
