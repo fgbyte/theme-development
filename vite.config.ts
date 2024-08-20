@@ -8,7 +8,8 @@ export default defineConfig({
 	build: {
 		rollupOptions: {
 			input: {
-				counter: "src/main.tsx", //👈 component name
+				counter: "src/components/counter/main.tsx", //👈 component path
+				"add-to-cart-button": "src/components/add-to-cart-button/main.tsx",
 			},
 			output: {
 				dir: "assets",

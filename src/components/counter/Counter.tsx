@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function App() {
+function Counter() {
 	const [count, setCount] = useState(0);
 	return (
 		<>
@@ -8,9 +8,9 @@ function App() {
 			<button type="button" onClick={() => setCount(count + 1)}>
 				Increment
 			</button>
-			<p>Count: {count}</p>
+			<p className="highlight">Count: {count}</p>
 		</>
 	);
 }
 
-export default App;
+export default Counter;
