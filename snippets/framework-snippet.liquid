@@ -1,18 +1,46 @@
 {{ 'tutorial.css' | asset_url | stylesheet_tag }}
 
-<div id="counter"></div>
+<div id="framework-snippet">
+  <p>framework</p>
+  <div id="counter"></div>
 
-{% if template.name == 'product' %}
-  <div
-    id="add-to-cart-button"
-    data-variant-id="{{ product.first_available_variant.id }}"
-    data-product-title="{{ product.title }}"
-  ></div>
-{% endif %}
+  {% if template.name == 'product' %}
+    <div
+      id="add-to-cart-button"
+      data-variant-id="{{ product.first_available_variant.id }}"
+      data-product-title="{{ product.title }}"
+    ></div>
+  {% endif %}
+</div>
 
-<script type="module" src="{{ '/vite-client.js' | asset_url }}" defer></script>
-<script type="module" src="{{ '/vite-counter.js' | asset_url }}" defer></script>
+<script>
+  const scripts = [
+    //salen en todas las paginas
+    "{{ '/vite-counter.js' | asset_url }}"
+  ]
 
-{% if template.name == 'product' %}
-  <script type="module" src="{{ '/vite-add-to-cart-button.js' | asset_url }}" defer></script>
-{% endif %}
+  //sale solo en products pages
+  {% if template.name == 'product' %}
+    scripts.push("{{ '/vite-add-to-cart-button.js' | asset_url }}")
+  {% endif %}
+
+  console.log(scripts)
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    console.log(entries)
+    if(entries[0].isIntersecting) {
+      for (const script of scripts) {
+        const scriptElement = document.createElement('script');
+        scriptElement.setAttribute('type', 'module');
+        scriptElement.setAttribute('src', script);
+        scriptElement.setAttribute('defer', 'defer');
+
+        document.body.appendChild(scriptElement);
+      }
+      console.log('script added')
+      observer.disconnect();
+    }
+  }, { threshold: 1 });
+
+  observer.observe(document.querySelector('#framework-snippet'));
+</script>
