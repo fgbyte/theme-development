@@ -78,8 +78,29 @@
     },
     "promotions_group_7mUFwC": {
       "type": "promotions-group",
+      "blocks": {
+        "promotion_k9TWit": {
+          "type": "promotion",
+          "settings": {
+            "title": "My Promotion",
+            "image": "shopify:\/\/shop_images\/wax-special.png"
+          }
+        },
+        "promotion_iPC7iV": {
+          "type": "promotion",
+          "settings": {
+            "title": "My Promotion 2",
+            "image": "shopify:\/\/shop_images\/snowboard_wax.png"
+          }
+        }
+      },
+      "block_order": [
+        "promotion_k9TWit",
+        "promotion_iPC7iV"
+      ],
       "settings": {
-        "title": "Promotion Group Section by @fgbyte"
+        "title": "Promotion Group Section by @fgbyte",
+        "title_alignment": "left"
       }
     }
   },
